@@ -85,4 +85,21 @@ const responseData = await wrapper
   .call();
 
 console.log(responseData);
-``` 
+```
+
+
+
+## Instalation
+
+Instale my-project com npm
+
+```bash
+  npm i fastwrapper
+```
+  
+Usage
+
+```javascript
+const fetchttp = require("fastwrapper");
+
+```
