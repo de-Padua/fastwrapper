@@ -76,9 +76,9 @@ class Wrapper {
       this.#fullreq = request;
     }
 
-    return this.resquest();
+    return this.request();
   }
-  async resquest() {
+  async request() {
     const request = new Request(this.url, this.#fullreq);
     const data = await fetch(request);
     const resp = await data.json();
