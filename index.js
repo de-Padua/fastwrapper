@@ -1,9 +1,10 @@
 class Wrapper {
+  response = "";
+
   #method;
   #body;
   #headers = { "Content-Type": "application/json" };
   #requestOption = {
-    method: this.#method, // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     credentials: "same-origin", // include, *same-origin, omit
@@ -14,6 +15,7 @@ class Wrapper {
 
   constructor(url) {
     this.url = url;
+    this.response = [];
   }
 
   get() {
@@ -32,6 +34,10 @@ class Wrapper {
     this.#method = "update";
     return this;
   }
+  delete() {
+    this.#method = "delete";
+    return this;
+  }
 
   headers(custom) {
     this.#headers = custom;
@@ -45,17 +51,17 @@ class Wrapper {
   }
   options(custom) {
     const customReq = { ...this.#requestOption, ...custom };
-
     this.#requestOption = customReq;
-
     return this;
   }
   call() {
     return this.buildRequest();
   }
   buildRequest() {
-    if (this.#method === "GET") {
+    console.log(this.#method);
+    if (this.#method === "get") {
       const request = {
+        method: this.#method,
         ...this.#requestOption,
         headers: this.#headers,
       };
@@ -63,16 +69,20 @@ class Wrapper {
     } else {
       const request = {
         ...this.#requestOption,
+        method: this.#method,
         body: this.#body,
         headers: this.#headers,
       };
       this.#fullreq = request;
     }
 
-    this.resquest();
+    return this.resquest();
   }
   async resquest() {
-    console.log(this.#fullreq);
+    const request = new Request(this.url, this.#fullreq);
+    const data = await fetch(request);
+    const resp = await data.json();
+    return resp;
   }
 }
 
