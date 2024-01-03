@@ -91,7 +91,6 @@ console.log(responseData);
 
 ## Instalation
 
-Instale my-project com npm
 
 ```bash
   npm i fastwrapper
