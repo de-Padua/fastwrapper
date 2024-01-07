@@ -45,7 +45,7 @@ Takes a URL as a parameter and initializes the `url` property.
 ## Usage
 
 ```javascript 
-const wrapper = new Wrapper("fastwrapper");
+const wrapper = new Wrapper("URL HERE");
 
 const responseData = await wrapper
   .get()
